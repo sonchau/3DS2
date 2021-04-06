@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Iframe 3DS2</title>
+</head>
+<body>
+
+<h1>This is a Heading - Iframe 3DS2</h1>
+
+<iframe height="100px" width="100px" title="test iframe" frameborder="1">
+  <html>
+    <head>
+      <title>Iframe Title</title>
+    </head>
+    <body>
+      <form id="collectionForm" method="POST" action="https://centinelapistag.cardinalcommerce.com/V1/Cruise/Collect">
+        <input type="hidden" name="Bin" value="4917610000000000" />
+        <input type="hidden" name="JWT" value="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMzUzMzA4MC0xOGM0LTRjMGItYjFhOC1lNTNiZWMwMzljMGMiLCJpYXQiOjE2MTc2ODc0NjUsImlzcyI6IjYwMWU4M2QxM2UyYmM0MTdiODYzY2FiMSIsImV4cCI6MTYxNzY5MTA2NSwiT3JnVW5pdElkIjoiNjAxZTgzZDFlMWI1ZGIzNjhlODk0NWUyIn0.Vfhy7OG8GeOkjJvLWoNWIn76zQ-yfY0QZnjdKiznUfQ" />
+      </form>
+      <script>
+        window.onload = function() {
+          document.getElementById('collectionForm').submit();
+        }
+      </script>
+    </body>
+  </html>
+</iframe>
+
+
+<script>
+  console.log('try to get response from iframe')
+  window.addEventListener("message", function(event) {
+    console.log('window event', event)
+   //This is a Cardinal Commerce URL in live.
+   if (event.origin === "https://centinelapistag.cardinalcommerce.com/") {
+       var data = JSON.parse(event.data);
+       console.log('Merchant received a message:', data);
+       if (data !== undefined && data.Status) {
+           // Extract the value of SessionId for onward processing.
+       }
+   }
+  }, false);
+
+</script>
+<script>
+  console.log('on message')
+  window.onmessage = (event) => {
+    console.log(`Received message: ${event.data}`);
+  };
+</script>
+
+
+</body>
+</html>
